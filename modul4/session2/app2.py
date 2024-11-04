@@ -59,3 +59,4 @@ def execute(menu: dict, numbers: list):
 n_list = get_user_numbers()
 show_menu()
 execute(meniu, n_list)
+
