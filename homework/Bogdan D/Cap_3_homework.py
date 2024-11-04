@@ -17,5 +17,5 @@ for caracter in user_input:
     if caracter in vocale:
         nr_vocale += 1
 print(f"Nr de vocale din cuvant: {nr_vocale}")
-#dsa
+
 # --------------------------------------------------
