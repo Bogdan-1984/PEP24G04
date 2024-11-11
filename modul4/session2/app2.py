@@ -23,6 +23,7 @@ meniu = {
 
 option = None
 
+
 def get_user_numbers():
     numbers = []
     while True:
@@ -56,7 +57,7 @@ def execute(menu: dict, numbers: list):
     print(f'Rezultatul: {f(numbers)}')
 
 
-n_list = get_user_numbers()
-show_menu()
-execute(meniu, n_list)
-
+if __name__ == '__main__':
+    n_list = get_user_numbers()
+    show_menu()
+    execute(meniu, n_list)

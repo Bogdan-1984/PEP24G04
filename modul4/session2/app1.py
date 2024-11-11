@@ -13,5 +13,5 @@ def age_average():
     age_average = sum(total_age) / len(total_age)
     return age_average
 
-
-print(f"Media de varsta a participantilor la sondajul de opinie este: {age_average()}")
+if __name__ == '__main__':
+    print(f"Media de varsta a participantilor la sondajul de opinie este: {age_average()}")

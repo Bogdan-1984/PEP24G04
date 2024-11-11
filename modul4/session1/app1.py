@@ -1,4 +1,8 @@
 # Module 4 #pbma 1
+
+print('Name of this script is: ', __name__)
+
+
 def check_password(password):
     digit = False
     special = False
@@ -21,7 +25,8 @@ def check_password(password):
         print("Parola nu are lugimea mai mare de 7 caractere")
 
 
-while True:
-    password = input("Introduceti parola: ")
-    if check_password(password):
-        break
+if __name__ == "__main__":
+    while True:
+        password = input("Introduceti parola: ")
+        if check_password(password):
+            break
