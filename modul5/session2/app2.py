@@ -15,11 +15,18 @@ din vitța m#a av#ntu$%a!a. &@ia$ !i a&um, dupa a&#!t int#$va^
 n%u a&#^ p%t%p b$u!& d# bu&u$i#, uimi$# !i n#in&$#d#$# &a$# mi-a
 &ufundat &u t%tu^ mint#a."""
 
-decrypt = """! = s
-@ = h
-# = e
-$ = r
-^ = l
-% = o
-& = c
-* = k"""
+char = {'!': 's', '@': 'h', '#': 'e', '$': 'r', '^': 'l', '%': 'o', '&': 'c', '*': 'k'}
+
+
+def decrypt(encrypted_text: str, decryption_method: dict):
+    decrypted_text = ""
+    for character in encrypted_text:
+        if character in decryption_method:
+            decrypted_text += decryption_method[character]
+        else:
+            decrypted_text += character
+    return decrypted_text
+
+
+dec_text = decrypt(text, char)
+print(dec_text)
