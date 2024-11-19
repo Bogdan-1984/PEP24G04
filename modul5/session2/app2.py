@@ -29,4 +29,52 @@ def decrypt(encrypted_text: str, decryption_method: dict):
 
 
 dec_text = decrypt(text, char)
+
 print(dec_text)
+sentences = dec_text.split('.')
+for sentence in sentences:
+    print(80 * '#')
+    # first = ''
+    new_sentance = ''
+    var1 = True
+    for c in sentence:
+        c: str
+        if c.isalpha() and var1:
+            c = c.upper()
+            var1 = False
+        new_sentance += c
+    # sentence_gen = sentence.__iter__()
+    # new_sentance = ''
+    # for c in sentence_gen:
+    #     if c.isalpha():
+    #         c = c.upper()
+    #         new_sentance += c
+    #         new_sentance += ''.join(sentence_gen)
+    #         break
+    #     else:
+    #         new_sentance += c
+    # for c in sentence_gen:
+    #     if not c.isalpha():
+    #         next(sentence_gen)
+
+    print(new_sentance)
+
+# c)
+words = dec_text.split()
+print(words)
+new_words = []
+for word in words:
+    word = word.strip(',')
+    if word.isnumeric():
+        continue
+    new_words.append(word)
+print(new_words)
+
+# d)
+print('short words')
+result = []
+for word in new_words:
+    if 5 <= len(word) <= 8:
+        result.append(word)
+print(set(result))
+
