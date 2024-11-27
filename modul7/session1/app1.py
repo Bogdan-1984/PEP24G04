@@ -55,10 +55,23 @@ class Triangle:
              2 * getattr(self, angle[0]) * getattr(self, angle[1]) * cos(radians(getattr(self, angle)))
              ) ** (1 / 2)
         )
-        if angle == "AB":
-            self.BC = deg(acos((self.B ** 2 + self.C ** 2 - self.A ** 2) / (2 * self.B * self.C)))
-            self.CA = deg(acos((self.C ** 2 + self.A ** 2 - self.B ** 2) / (2 * self.C * self.A)))
-        # if angle == "BC":
+        setattr(
+            self,
+            angle[1] + "ABC".strip(angle),
+            deg(acos((getattr(self, angle[1]) ** 2 +
+                      getattr(self, "ABC".strip(angle)) ** 2 -
+                      getattr(self, angle[0]) ** 2) / (2 * getattr(self, angle[1]) *
+                                                       getattr(self, "ABC".strip(angle)))))
+        )
+        setattr(
+            self,
+            "ABC".strip(angle) + angle[0],
+            deg(acos((getattr(self, "ABC".strip(angle)) ** 2 +
+                      getattr(self, angle[0]) ** 2 -
+                      getattr(self, angle[1]) ** 2) / (2 * getattr(self, "ABC".strip(angle)) *
+                                                       getattr(self, angle[0]))))
+        )
+        # if angle == "AB":
         #     self.AB += degrees
         #     self.C = (self.A ** 2 + self.B ** 2 - 2 * self.A * self.B * cos(radians(self.AB))) ** (1 / 2)
         #     self.BC = deg(acos((self.B ** 2 + self.C ** 2 - self.A ** 2) / (2 * self.B * self.C)))
@@ -69,7 +82,11 @@ class Triangle:
 # Create an object from your class with default constructor values and modify angle AB by +30 degrees and side A by +1.5
 
 triangle = Triangle()
-triangle.modify_angle("AB", 30)
+triangle.modify_angle("CA", -30)
 print(triangle.AB)
+print(triangle.BC)
+print(triangle.CA)
+print(triangle.A)
+print(triangle.B)
 print(triangle.C)
-print(triangle.BC, triangle.CA)
+
