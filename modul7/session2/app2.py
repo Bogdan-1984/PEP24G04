@@ -36,3 +36,7 @@ print(nr_bmw)
 
 car_audi = list(filter(lambda masina: masina.marca == "Audi", masini))
 print(sum(map(lambda masina: masina.an, car_audi)) / len(list(car_audi)))
+
+marca_cautata = input("Introduceti marca de masina cautata:")
+nr_masini = len(list(filter(lambda m: m.marca == marca_cautata, masini)))
+print(nr_masini)
