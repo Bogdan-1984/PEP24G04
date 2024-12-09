@@ -7,7 +7,11 @@ class EnumeratorCuvant:
         return self
 
     def __next__(self):
-        # todo
+        if self.i < len(self.cuvant):
+            valoare = self.i, self.cuvant[self.i]
+            self.i += 1
+        else:
+            raise StopIteration
         return valoare
 
 
