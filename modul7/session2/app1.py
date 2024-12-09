@@ -14,6 +14,6 @@ class EnumeratorCuvant:
             raise StopIteration
         return valoare
 
-
-for i, litera in EnumeratorCuvant("alfabet"):
-    print(f"{i}: {litera}")
+if __name__ == '__main__':
+    for i, litera in EnumeratorCuvant("alfabet"):
+        print(f"{i}: {litera}")
