@@ -8,5 +8,5 @@ Mihaela/1999-12-11
 Daria/1999-12-11
 Adrian/1997-5-14
 Ariana/1999-9-7
-Alexandru/2000-25-2
-Radu/2000-25-2
+Alexandru/2000-2-25
+Radu/2000-2-25

@@ -1,0 +1,4 @@
+Marian;nt;0726234078
+Andrei;posix;0725633038
+Robert;nt;0727743039
+Maria;posix;0734552532
