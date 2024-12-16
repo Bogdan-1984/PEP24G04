@@ -33,3 +33,47 @@ Iterating the object will return the serial numbers produced that day by all wor
    b) 5p: class documentation for all classes
    c) 5p: method documentation for all methods
 """
+from datetime import datetime
+
+
+class DuplicateDataException(ValueError):
+    """ABC COMMENT"""
+    pass
+
+
+class ShoeProductionIterator:
+    def __iter__(self):
+        return self
+
+    def __next__(self):
+        pass
+
+    def __init__(self, data):
+        self.data = data
+
+
+class ShoeProduction:
+    def __init__(self, date=datetime.now()):
+        self.date = date
+        self.worker_data = {}
+
+    def add_work(self, worker_name: str, series: list[int]):
+        # if worker_name is not
+        pass
+
+    def __iter__(self):
+        return ShoeProductionIterator(self.worker_data)
+
+
+if __name__ == "__main__":
+    shoe_prod = ShoeProduction(datetime(year=2024, month=12, day=16))
+    shoe_prod.add_work("Joe", [402, 403, 409])
+    shoe_prod.add_work("Ana", [399, 404, 405])
+    shoe_prod.add_work("Tim", [400, 401, 406])
+    try:
+        shoe_prod.add_work("workerX", [406, 407, 408])
+    except DuplicateDataException:
+        print("cheater")
+    with open("production.txt", "w") as file:
+        for serial in shoe_prod:
+            file.write(f"{serial}\n")
