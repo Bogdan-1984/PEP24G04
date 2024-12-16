@@ -125,3 +125,56 @@ if __name__ == "__main__":
     print("Keyboards with production time > 2000 seconds written to file.")
 
 # Nvidia
+
+from typing import Dict, List, Union
+from datetime import timedelta
+
+
+class KeyboardProductionTimes:
+    def __init__(self):
+        self.keyboards: Dict[str, Union[timedelta, int]] = {}
+
+    def __iter__(self):
+        return KeyboardProductionTimesIterator(self.keyboards)
+
+    def add_keyboard(self, serial: str, time: Union[timedelta, int]):
+        self.keyboards[serial] = time
+
+    def average_production_time(self) -> Union[timedelta, int]:
+        total_time = sum(time for time in self.keyboards.values())
+        return total_time / len(self.keyboards)
+
+
+class KeyboardProductionTimesIterator:
+    def __init__(self, keyboards: Dict[str, Union[timedelta, int]]):
+        self.keyboards = keyboards
+        self.current_index = 0
+
+    def __iter__(self):
+        return self
+
+    def __next__(self):
+        if self.current_index >= len(self.keyboards):
+            raise StopIteration
+
+        serial, time = list(self.keyboards.items())[self.current_index]
+        self.current_index += 1
+
+        if time > 2000:
+            return serial, time
+        else:
+            return self.__next__()
+
+
+production_times = KeyboardProductionTimes()
+
+production_times.add_keyboard("KB023871", 3210)
+production_times.add_keyboard("KB023873", 1890)
+production_times.add_keyboard("KB023875", 1982)
+
+average_time = production_times.average_production_time()
+print(f"Average production time: {average_time}")
+
+with open("production_times.txt", "w") as file:
+    for serial, time in production_times:
+        file.write(f"{serial}: {time}\n")

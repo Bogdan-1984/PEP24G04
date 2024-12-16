@@ -9,10 +9,10 @@ Iterating the object will return the serial numbers produced that day by all wor
         - 5p: argument: 5p
             - 1 receives worker name as string
             - 2 receives series produced as list of ints
-        - 10p: using this method more then once for the same worker allows the worker to add new values but not
+        - 10p: using this method more than once for the same worker allows the worker to add new values but not
             retransmit old values .In case existing value is entered by two workers a specific exception
             (DuplicateDataException - created by you) and inheriting ValueError will be raised.
-            (ex name1: 100, 101; name1: 101, 102; results in exception DuplicateDataException) 10p
+            (ex name1: 100, 101; name2: 101, 102; results in exception DuplicateDataException) 10p
         - 10p: method validates that series introduced do not already belong to another worker. In case of conflict
             series will be removed from both workers and information will be added to instance variable that tracks
             cheating workers and then ValueError with message: "Conflict series: <series>, Workers: <nume1>, <nume2>"
