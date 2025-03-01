@@ -46,20 +46,46 @@ class ShoeProductionIterator:
         return self
 
     def __next__(self):
-        pass
+        if not self.all_series:
+            raise StopIteration
+        return self.all_series.pop()
 
     def __init__(self, data):
-        self.data = data
+        self.data: dict[str: set] = data
+        self.all_series = []
+        for series in self.data.values():
+            self.all_series.extend(list(series))
 
 
 class ShoeProduction:
+    """Keeps track or series produces in factory by each worker"""
+
     def __init__(self, date=datetime.now()):
         self.date = date
-        self.worker_data = {}
+        self.worker_data: dict[str: set] = {}
+        self.bad_workers: dict[int: list[str, str]] = {}
 
     def add_work(self, worker_name: str, series: list[int]):
-        # if worker_name is not
-        pass
+        """Allows adding work series for a specific worker"""
+
+        for worker, series_ in self.worker_data.items():
+            duplicate = set(series).intersection(series_)
+            if duplicate:
+                self.worker_data[worker].difference_update(duplicate)
+                self.bad_workers.update({duplicate.copy().pop(): [worker, worker_name]})
+                break
+        else:
+            result = self.worker_data.get(worker_name, set())
+            result.update(series)
+            self.worker_data.update({worker_name: result})
+            return None
+
+        result = self.worker_data.get(worker_name, set())
+        limited_series = set(series)
+        limited_series.difference_update(duplicate)
+        result.update(limited_series)
+        self.worker_data.update({worker_name: result})
+        raise DuplicateDataException
 
     def __iter__(self):
         return ShoeProductionIterator(self.worker_data)
@@ -73,7 +99,8 @@ if __name__ == "__main__":
     try:
         shoe_prod.add_work("workerX", [406, 407, 408])
     except DuplicateDataException:
-        print("cheater")
+        for data in shoe_prod.bad_workers.items():
+            print(f"Conflict series: {data[0]}, Workers: {data[1][0]}, {data[1][1]}")
     with open("production.txt", "w") as file:
         for serial in shoe_prod:
             file.write(f"{serial}\n")
